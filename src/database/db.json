@@ -1,0 +1,41 @@
+{
+  "aircraft": [
+    {
+      "id": "HB-T13",
+      "type": "Helicopter",
+      "manufacturer": "Airbus",
+      "model": "H125",
+      "operator": "Stefano Rutishauser",
+      "passenger": 5,
+      "createdAt": "8.12.2023, 10:29:00",
+      "updatedAt": "8.12.2023, 12:17:32",
+      "specs": [
+        "high climb rate",
+        "power"
+      ]
+    },
+    {
+      "id": "HB-ABC1",
+      "type": "Helicopter",
+      "manufacturer": "Robinson",
+      "model": "R22",
+      "operator": "Wingrotators",
+      "passenger": 2,
+      "createdAt": "8.12.2023, 10:30:00",
+      "updatedAt": "8.12.2023, 10:30:00",
+      "specs": [
+        "low cost",
+        "tiny"
+      ]
+    },
+    {
+      "id": "HB-ZXY",
+      "type": "Helicopter",
+      "manufacturer": "Robinson",
+      "model": "R44",
+      "body": "Wingrotators",
+      "createdAt": "27.12.2023, 11:56:18",
+      "updatedAt": "27.12.2023, 11:56:19"
+    }
+  ]
+}
