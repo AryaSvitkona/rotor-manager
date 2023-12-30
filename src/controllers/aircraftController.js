@@ -1,17 +1,35 @@
 const aircraftService = require("../services/aircraftService");
 const getAllAircraft = (req, res) => {
-    const allAircraft = aircraftService.getAllAircraft();
-    res.send({ status: "OK", data: allAircraft });
+    try{
+        const allAircraft = aircraftService.getAllAircraft();
+        res.send({ status: "OK", data: allAircraft });
+    } catch (error){
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 const getAircraftById = (req, res) => {
     const {params: { aircraftId },
     } = req;
     if (!aircraftId) {
-        return;
+        res
+            .status(400)
+            .send({
+                status: "FAILED",
+                data: { error: "Parameter ':aircraftId' can not be empty" },
+            });
     }
-    const aircraft = aircraftService.getAircraftById(aircraftId);
-    res.send({ status: "OK", data: aircraft });
+    try{
+        const aircraft = aircraftService.getAircraftById(aircraftId);
+        res.send({ status: "OK", data: aircraft });
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
+
 };
 
 const createNewAircraft = (req, res) => {
@@ -23,6 +41,15 @@ const createNewAircraft = (req, res) => {
         !body.model ||
         !body.operator
     ) {
+        res
+            .status(400)
+            .send({
+                status: "FAILED",
+                data: {
+                    error:
+                        "One of the following keys is missing or is empty in request body: 'id', 'type', 'manufacturer', 'model', 'operator'",
+                },
+            });
         return;
     }
     const newAircraft = {
@@ -32,8 +59,14 @@ const createNewAircraft = (req, res) => {
         model: body.model,
         body: body.operator
     };
-    const createdAircraft = aircraftService.createNewAircraft(newAircraft);
-    res.status(201).send({ status: "OK", data: createdAircraft });
+    try{
+        const createdAircraft = aircraftService.createNewAircraft(newAircraft);
+        res.status(201).send({ status: "OK", data: createdAircraft });
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 const updateAircraftById = (req, res) => {
@@ -42,10 +75,21 @@ const updateAircraftById = (req, res) => {
         params: { aircraftId },
     } = req;
     if (!aircraftId) {
-        return;
+        res
+            .status(400)
+            .send({
+                status: "FAILED",
+                data: { error: "Parameter ':aircraftId' can not be empty" },
+            });
     }
-    const updatedAircraft = aircraftService.updateAircraftById(aircraftId, body);
-    res.send({ status: "OK", data: updatedAircraft });
+    try{
+        const updatedAircraft = aircraftService.updateAircraftById(aircraftId, body);
+        res.send({ status: "OK", data: updatedAircraft });
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
 };
 
 const deleteAircraftById = (req, res) => {
@@ -53,10 +97,22 @@ const deleteAircraftById = (req, res) => {
         params: { aircraftId },
     } = req;
     if (!aircraftId) {
-        return;
+        res
+            .status(400)
+            .send({
+                status: "FAILED",
+                data: { error: "Parameter ':aircraftId' can not be empty" },
+            });
     }
-    aircraftService.deleteAircraftById(aircraftId);
-    res.status(204).send({ status: "OK" });
+    try {
+        aircraftService.deleteAircraftById(aircraftId);
+        res.status(204).send({ status: "OK" });
+    } catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: "FAILED", data: { error: error?.message || error } });
+    }
+
 };
 
 module.exports = {

@@ -1,12 +1,20 @@
 const aircraftTable = require("../database/aircraft");
 
 const getAllAircraft = () => {
-    const allAircraft = aircraftTable.getAllAircraft();
-    return allAircraft;
+    try{
+        return aircraftTable.getAllAircraft();
+    } catch (error) {
+        throw error;
+    }
+
 };
 
 const getAircraftById = (aircraftId) => {
-    return aircraftTable.getAircraftById(aircraftId);
+    try{
+        return aircraftTable.getAircraftById(aircraftId);
+    } catch (error) {
+        throw error;
+    }
 };
 
 const createNewAircraft = (newAircraft) => {
@@ -15,15 +23,27 @@ const createNewAircraft = (newAircraft) => {
         createdAt: new Date().toLocaleString("de-CH", { timeZone: "Europe/Zurich" }),
         updatedAt: new Date().toLocaleString("de-CH", { timeZone: "Europe/Zurich" })
     }
+    try{
     return aircraftTable.createNewAircraft(newAircraftToCreate);
+    } catch (error){
+        return error;
+    }
 };
 
 const updateAircraftById = (aircraftId, data) => {
-    return aircraftTable.updateAircraftById(aircraftId, data);
+    try {
+        return aircraftTable.updateAircraftById(aircraftId, data);
+    } catch (error) {
+        throw error;
+    }
 };
 
 const deleteAircraftById = (aircraftId) => {
-    return aircraftTable.deleteAircraftById(aircraftId);
+    try {
+        return aircraftTable.deleteAircraftById(aircraftId);
+    } catch (error) {
+        throw error;
+    }
 };
 
 module.exports = {
