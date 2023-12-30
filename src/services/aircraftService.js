@@ -1,8 +1,8 @@
 const aircraftTable = require("../database/aircraft");
 
-const getAllAircraft = () => {
+const getAllAircraft = (filterParams) => {
     try{
-        return aircraftTable.getAllAircraft();
+        return aircraftTable.getAllAircraft(filterParams);
     } catch (error) {
         throw error;
     }

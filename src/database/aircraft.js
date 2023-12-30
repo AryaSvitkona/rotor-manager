@@ -1,9 +1,20 @@
 const DB = require("./db.json");
 const { saveToDatabase } = require("./utils");
 
-const getAllAircraft = () => {
+const getAllAircraft = (filterParams) => {
     try {
-        return DB.aircraft;
+        const aircraft = DB.aircraft;
+        if (filterParams.type) {
+            return DB.aircraft.filter((aircraft) =>
+                aircraft.type.toLowerCase().includes(filterParams.type)
+            );
+        }
+        if (filterParams.manufacturer) {
+            return DB.aircraft.filter((aircraft) =>
+                aircraft.manufacturer.toLowerCase().includes(filterParams.manufacturer)
+            );
+        }
+        return aircraft;
     } catch (error) {
         throw { status: 500, message: error };
     }

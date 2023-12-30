@@ -1,7 +1,9 @@
 const aircraftService = require("../services/aircraftService");
 const getAllAircraft = (req, res) => {
+    // const type = req.query.type;
+    const { type, manufacturer } = req.query;
     try{
-        const allAircraft = aircraftService.getAllAircraft();
+        const allAircraft = aircraftService.getAllAircraft({ type, manufacturer });
         res.send({ status: "OK", data: allAircraft });
     } catch (error){
         res
