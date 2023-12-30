@@ -1,6 +1,44 @@
 const DB = require("./db.json");
 const { saveToDatabase } = require("./utils");
 
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Aircraft:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: string
+ *           example: HB-ABC
+ *         type:
+ *           type: string
+ *           example: Turbine
+ *         manufacturer:
+ *           type: string
+ *           example: Robinson
+ *         equipment:
+ *           type: string
+ *           example: R66
+ *         operator:
+ *           type: string
+ *           example: Foobar GmbH
+ *         passenger:
+ *           type: int
+ *           example: 5
+ *         specs:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example: ["huge performance", "affordable hour rate", "turbine"]
+ *         createdAt:
+ *           type: string
+ *           example: 8.12.2023, 10:29:00
+ *         updatedAt:
+ *           type: string
+ *           example: 27.12.2023, 12:10:20
+ */
+
 const getAllAircraft = (filterParams) => {
     try {
         const aircraft = DB.aircraft;

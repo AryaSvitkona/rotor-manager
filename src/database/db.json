@@ -2,7 +2,7 @@
   "aircraft": [
     {
       "id": "HB-T13",
-      "type": "Helicopter",
+      "type": "Turbine",
       "manufacturer": "Airbus",
       "model": "H125",
       "operator": "Stefano Rutishauser",
@@ -16,7 +16,7 @@
     },
     {
       "id": "HB-ABC1",
-      "type": "Helicopter",
+      "type": "Piston",
       "manufacturer": "Robinson",
       "model": "R22",
       "operator": "Wingrotators",
@@ -30,7 +30,7 @@
     },
     {
       "id": "HB-ZXY",
-      "type": "Helicopter",
+      "type": "Piston",
       "manufacturer": "Robinson",
       "model": "R44",
       "body": "Wingrotators",
