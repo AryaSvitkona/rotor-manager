@@ -1,55 +1,91 @@
-const aircraftTable = require("../database/aircraft");
+const { PrismaClient } = require('@prisma/client')
+const prisma = new PrismaClient()
 
-const getAllAircraft = (filterParams) => {
-    try{
-        return aircraftTable.getAllAircraft(filterParams);
+async function getAllAircraft(filterParams) {
+    try {
+        return await prisma.aircraft.findMany({
+            where: {
+                type: filterParams.type,
+                manufacturer: filterParams.manufacturer
+            }
+        });
     } catch (error) {
         throw error;
     }
+}
 
-};
-
-const getAircraftById = (aircraftId) => {
+async function getAircraftById(aircraftId) {
     try{
-        return aircraftTable.getAircraftById(aircraftId);
+        return await await prisma.aircraft.findUniqueOrThrow({
+            where: {
+                id: aircraftId
+            }
+        });
     } catch (error) {
         throw error;
     }
-};
+}
 
-const createNewAircraft = (newAircraft) => {
+async function createNewAircraft(newAircraft) {
     const newAircraftToCreate = {
         ...newAircraft,
-        createdAt: new Date().toLocaleString("de-CH", { timeZone: "Europe/Zurich" }),
-        updatedAt: new Date().toLocaleString("de-CH", { timeZone: "Europe/Zurich" })
+        createdAt: new Date(),
+        updatedAt: new Date()
     }
     try{
-    return aircraftTable.createNewAircraft(newAircraftToCreate);
+    return await prisma.aircraft.create({
+        data: {
+            id: newAircraftToCreate.id,
+            type: newAircraftToCreate.type,
+            manufacturer: newAircraftToCreate.manufacturer,
+            model: newAircraftToCreate.model,
+            operator: newAircraftToCreate.operator,
+            passenger: newAircraftToCreate.passenger,
+            createdAt: newAircraftToCreate.createdAt,
+            updatedAt: newAircraftToCreate.updatedAt,
+            specs: newAircraftToCreate.specs
+        }
+    })
     } catch (error){
         return error;
     }
-};
+}
 
-const updateAircraftById = (aircraftId, data) => {
+async function updateAircraftById(aircraftId, data) {
     try {
-        return aircraftTable.updateAircraftById(aircraftId, data);
+        return await prisma.aircraft.update({
+            where: { id: aircraftId },
+            data: {
+                type: data.type,
+                manufacturer: data.manufacturer,
+                model: data.model,
+                operator: data.operator,
+                passenger: data.passenger,
+                updatedAt: new Date(),
+                specs: data.specs
+            }
+        });
     } catch (error) {
         throw error;
     }
-};
+}
 
-const deleteAircraftById = (aircraftId) => {
-    try {
-        return aircraftTable.deleteAircraftById(aircraftId);
+async function deleteAircraftById(aircraftId) {
+    try{
+        return await prisma.aircraft.delete({
+            where: {
+                id: aircraftId
+            }
+        });
     } catch (error) {
         throw error;
     }
-};
+}
 
 module.exports = {
     getAllAircraft,
     getAircraftById,
     createNewAircraft,
     updateAircraftById,
-    deleteAircraftById,
+    deleteAircraftById
 };

@@ -1,18 +1,19 @@
 const aircraftService = require("../services/aircraftService");
-const getAllAircraft = (req, res) => {
+async function getAllAircraft(req, res){
     // const type = req.query.type;
     const { type, manufacturer } = req.query;
     try{
-        const allAircraft = aircraftService.getAllAircraft({ type, manufacturer });
-        res.send({ status: "OK", data: allAircraft });
+        const allAircraft = await aircraftService.getAllAircraft({ type, manufacturer });
+        console.log(allAircraft);
+        res.json(allAircraft);
     } catch (error){
         res
             .status(error?.status || 500)
             .send({ status: "FAILED", data: { error: error?.message || error } });
     }
-};
+}
 
-const getAircraftById = (req, res) => {
+async function getAircraftById (req, res) {
     const {params: { aircraftId },
     } = req;
     if (!aircraftId) {
@@ -24,7 +25,7 @@ const getAircraftById = (req, res) => {
             });
     }
     try{
-        const aircraft = aircraftService.getAircraftById(aircraftId);
+        const aircraft = await aircraftService.getAircraftById(aircraftId);
         res.send({ status: "OK", data: aircraft });
     } catch (error) {
         res
@@ -32,9 +33,9 @@ const getAircraftById = (req, res) => {
             .send({ status: "FAILED", data: { error: error?.message || error } });
     }
 
-};
+}
 
-const createNewAircraft = (req, res) => {
+async function createNewAircraft(req, res){
     const { body } = req;
     if (
         !body.id ||
@@ -59,19 +60,19 @@ const createNewAircraft = (req, res) => {
         type: body.type,
         manufacturer: body.manufacturer,
         model: body.model,
-        body: body.operator
+        operator: body.operator
     };
     try{
-        const createdAircraft = aircraftService.createNewAircraft(newAircraft);
+        const createdAircraft = await aircraftService.createNewAircraft(newAircraft);
         res.status(201).send({ status: "OK", data: createdAircraft });
     } catch (error) {
         res
             .status(error?.status || 500)
             .send({ status: "FAILED", data: { error: error?.message || error } });
     }
-};
+}
 
-const updateAircraftById = (req, res) => {
+async function updateAircraftById(req, res) {
     const {
         body,
         params: { aircraftId },
@@ -85,16 +86,17 @@ const updateAircraftById = (req, res) => {
             });
     }
     try{
-        const updatedAircraft = aircraftService.updateAircraftById(aircraftId, body);
+        const updatedAircraft = await aircraftService.updateAircraftById(aircraftId, body);
+        console.log(updatedAircraft)
         res.send({ status: "OK", data: updatedAircraft });
     } catch (error) {
         res
             .status(error?.status || 500)
             .send({ status: "FAILED", data: { error: error?.message || error } });
     }
-};
+}
 
-const deleteAircraftById = (req, res) => {
+async function deleteAircraftById(req, res) {
     const {
         params: { aircraftId },
     } = req;
@@ -107,15 +109,15 @@ const deleteAircraftById = (req, res) => {
             });
     }
     try {
-        aircraftService.deleteAircraftById(aircraftId);
-        res.status(204).send({ status: "OK" });
+        await aircraftService.deleteAircraftById(aircraftId);
+        res.status(204).send({ status: "OK"});
     } catch (error) {
         res
             .status(error?.status || 500)
             .send({ status: "FAILED", data: { error: error?.message || error } });
     }
 
-};
+}
 
 module.exports = {
     getAllAircraft,
