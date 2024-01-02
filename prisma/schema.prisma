@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Aircraft {
+  id           String   @id
+  type         String   @db.VarChar(255)
+  manufacturer String   @db.VarChar(255)
+  model        String   @db.VarChar(255)
+  operator     String   @db.VarChar(255)
+  passenger    Int      @default(0)
+  specs        String?  @db.Text
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now())
+}
+
+model Pilot {
+  id          String   @id @default(uuid())
+  firstname   String   @db.VarChar(50)
+  lastname    String   @db.VarChar(50)
+  gender      String   @db.VarChar(10)
+  dateOfBirth DateTime
+  email       String   @db.VarChar(255)
+  password    String   @db.VarChar(255)
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  aircraftId    String   @db.VarChar(10)
+  pilot         String   @db.VarChar(255)
+  startDateTime DateTime @default(now())
+  endDateTime   DateTime @default(now())
+}
