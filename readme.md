@@ -14,3 +14,6 @@ Small Express API for learning purpose.
 - [ ] Authentication & Authorization ex. with [Passport](https://www.passportjs.org/docs/)
 - [ ] Rewrite app in Typescript
 - [ ] Write PWA App as Client
+
+## Bookmarks
+- https://restfulapi.net/security-essentials/

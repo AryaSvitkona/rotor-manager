@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Aircraft {
+model aircraft {
   id           String   @id
   type         String   @db.VarChar(255)
   manufacturer String   @db.VarChar(255)
@@ -22,20 +22,24 @@ model Aircraft {
   updatedAt    DateTime @default(now())
 }
 
-model Pilot {
-  id          String   @id @default(uuid())
+model pilots {
+  id          String   @id @db.VarChar(4)
   firstname   String   @db.VarChar(50)
   lastname    String   @db.VarChar(50)
   gender      String   @db.VarChar(10)
   dateOfBirth DateTime
   email       String   @db.VarChar(255)
   password    String   @db.VarChar(255)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
 }
 
-model Booking {
+model bookings {
   id            String   @id @default(uuid())
   aircraftId    String   @db.VarChar(10)
   pilot         String   @db.VarChar(255)
   startDateTime DateTime @default(now())
   endDateTime   DateTime @default(now())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
 }

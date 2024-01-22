@@ -9,7 +9,12 @@ const options = {
 
 
     },
-    apis: ["./src/v1/routes/aircraftRoutes.js", "./src/database/aircraft.js"],
+    apis: [
+        "./src/v1/routes/aircraftRoutes.js",
+        "./src/v1/routes/pilotRoutes.js",
+        "./src/services/aircraftService.js",
+        "./src/services/pilotService.js",
+    ],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

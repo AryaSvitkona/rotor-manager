@@ -1,27 +1,13 @@
 const express = require('express');
-const aircraftController = require("../../controllers/aircraftController");
-const bookingController = require("../../controllers/bookingController");
+const pilotController = require("../../controllers/pilotController");
 const router = express.Router();
 
 /**
  * @openapi
- * /api/v1/aircraft:
+ * /api/v1/pilots:
  *   get:
  *     tags:
- *       - Aircraft
- *     parameters:
- *       - in: query
- *         name: type
- *         schema:
- *           type: string
- *         example: turbine
- *         description: The engine type of the aircraft
- *       - in: query
- *         name: manufacturer
- *         schema:
- *           type: string
- *         example: Robinson
- *         description: The manufacturer name of the aircraft
+ *       - Pilots
  *     responses:
  *       200:
  *         description: OK
@@ -36,7 +22,7 @@ const router = express.Router();
  *                 data:
  *                   type: array
  *                   items:
- *                     $ref: '#/components/schemas/Aircraft'
+ *                     $ref: '#/components/schemas/Pilot'
  *       5XX:
  *         description: FAILED
  *         content:
@@ -54,14 +40,14 @@ const router = express.Router();
  *                       type: string
  *                       example: "Some error message"
  */
-router.get( '/', aircraftController.getAllAircraft);
+router.get( '/', pilotController.readPilots);
 
 /**
  * @openapi
- * /api/v1/aircraft/:aircraftId:
+ * /api/v1/pilots/:pilotId:
  *   get:
  *     tags:
- *       - Aircraft
+ *       - Pilots
  *     responses:
  *       200:
  *         description: OK
@@ -75,7 +61,8 @@ router.get( '/', aircraftController.getAllAircraft);
  *                   example: OK
  *                 data:
  *                   type: object
- *                   $ref: '#/components/schemas/Aircraft'
+ *                   $ref: '#/components/schemas/Pilot'
+ *
  *       5XX:
  *         description: FAILED
  *         content:
@@ -93,14 +80,14 @@ router.get( '/', aircraftController.getAllAircraft);
  *                       type: string
  *                       example: "Some error message"
  */
-router.get('/:aircraftId', aircraftController.getAircraftById);
+router.get('/:pilotId', pilotController.readPilotById);
 
 /**
  * @openapi
- * /api/v1/aircraft/:
+ * /api/v1/pilots/:
  *   post:
  *     tags:
- *       - Aircraft
+ *       - Pilots
  *     responses:
  *       200:
  *         description: OK
@@ -114,7 +101,8 @@ router.get('/:aircraftId', aircraftController.getAircraftById);
  *                   example: OK
  *                 data:
  *                   type: object
- *                   $ref: '#/components/schemas/Aircraft'
+ *                   $ref: '#/components/schemas/Pilot'
+ *
  *       5XX:
  *         description: FAILED
  *         content:
@@ -132,14 +120,14 @@ router.get('/:aircraftId', aircraftController.getAircraftById);
  *                       type: string
  *                       example: "Some error message"
  */
-router.post('/', aircraftController.createNewAircraft);
+router.post('/', pilotController.createPilot);
 
 /**
  * @openapi
- * /api/v1/aircraft/:aircraftId:
+ * /api/v1/pilots/:pilotId:
  *   patch:
  *     tags:
- *       - Aircraft
+ *       - Pilots
  *     responses:
  *       200:
  *         description: OK
@@ -153,7 +141,8 @@ router.post('/', aircraftController.createNewAircraft);
  *                   example: OK
  *                 data:
  *                   type: object
- *                   $ref: '#/components/schemas/Aircraft'
+ *                   $ref: '#/components/schemas/Pilot'
+ *
  *       5XX:
  *         description: FAILED
  *         content:
@@ -171,14 +160,14 @@ router.post('/', aircraftController.createNewAircraft);
  *                       type: string
  *                       example: "Some error message"
  */
-router.patch('/:aircraftId', aircraftController.updateAircraftById);
+router.patch('/:pilotId', pilotController.updatePilot);
 
 /**
  * @openapi
- * /api/v1/aircraft/:aircraftId:
+ * /api/v1/pilots/:pilotId:
  *   delete:
  *     tags:
- *       - Aircraft
+ *       - Pilots
  *     responses:
  *       204:
  *         description: OK
@@ -199,6 +188,6 @@ router.patch('/:aircraftId', aircraftController.updateAircraftById);
  *                       type: string
  *                       example: "Some error message"
  */
-router.delete('/:aircraftId', aircraftController.deleteAircraftById);
+router.delete('/:pilotId', pilotController.deletePilot);
 
 module.exports = router;
