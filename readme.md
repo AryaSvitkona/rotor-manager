@@ -8,9 +8,10 @@ Small Express API for learning purpose.
 
 ## To Do's
 - [ ] Add [express-validator](https://express-validator.github.io/docs/guides/getting-started)
-- [ ] Use [Prisma](https://www.prisma.io/) & Database 
-- [ ] Add all schemas to OpenApi Spec
-- [ ] Add all endpoints to OpenApi Spec
+- [x] Use [Prisma](https://www.prisma.io/) & Database 
+- [x] Add all schemas to OpenApi Spec
+- [x] Add all endpoints to OpenApi Spec
+- [ ] Add docker-compose.yaml for local development
 - [ ] Authentication & Authorization ex. with [Passport](https://www.passportjs.org/docs/)
 - [ ] Rewrite app in Typescript
 - [ ] Write PWA App as Client
