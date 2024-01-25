@@ -43,7 +43,7 @@ async function readPilots(filterParams) {
 
 async function readPilotById(pilotId) {
     try{
-        return await await prisma.pilots.findUniqueOrThrow({
+        return await prisma.pilots.findUniqueOrThrow({
             where: {
                 id: pilotId
             }

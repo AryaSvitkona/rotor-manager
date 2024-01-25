@@ -53,8 +53,8 @@ async function createPilot(req, res){
             });
         return;
     }
-    console.log(body);
     const createNewPilot = {
+        id: body.id,
         firstname: body.firstname,
         lastname: body.lastname,
         gender: body.gender,
