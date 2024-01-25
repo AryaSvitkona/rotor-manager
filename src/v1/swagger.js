@@ -12,8 +12,10 @@ const options = {
     apis: [
         "./src/v1/routes/aircraftRoutes.js",
         "./src/v1/routes/pilotRoutes.js",
+        "./src/v1/routes/bookingRoutes.js",
         "./src/services/aircraftService.js",
         "./src/services/pilotService.js",
+        "./src/services/bookingService.js"
     ],
 };
 

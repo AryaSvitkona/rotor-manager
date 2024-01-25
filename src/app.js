@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 
 const v1AircraftRouter = require("./v1/routes/aircraftRoutes");
 const v1PilotRouter = require("./v1/routes/pilotRoutes");
+const v1BookingRouter = require("./v1/routes/bookingRoutes");
 const { swaggerDocs: V1SwaggerDocs } = require("./v1/swagger");
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use("/api/v1/aircraft", v1AircraftRouter);
 app.use("/api/v1/pilots", v1PilotRouter);
+app.use("/api/v1/bookings", v1BookingRouter);
 
 app.get("/", (req,res) => {
     res.send('Nothing to see here. Use API Url!')
