@@ -4,7 +4,6 @@ async function getAllAircraft(req, res){
     const { type, manufacturer } = req.query;
     try{
         const allAircraft = await aircraftService.getAllAircraft({ type, manufacturer });
-        console.log(allAircraft);
         res.json(allAircraft);
     } catch (error){
         res
@@ -21,7 +20,7 @@ async function getAircraftById (req, res) {
             .status(400)
             .send({
                 status: "FAILED",
-                data: { error: "Parameter ':aircraftId' can not be empty" },
+                data: { error: "Parameter '{aircraftId}' can not be empty" },
             });
     }
     try{
@@ -87,7 +86,6 @@ async function updateAircraftById(req, res) {
     }
     try{
         const updatedAircraft = await aircraftService.updateAircraftById(aircraftId, body);
-        console.log(updatedAircraft)
         res.send({ status: "OK", data: updatedAircraft });
     } catch (error) {
         res
@@ -110,7 +108,7 @@ async function deleteAircraftById(req, res) {
     }
     try {
         await aircraftService.deleteAircraftById(aircraftId);
-        res.status(204).send({ status: "OK"});
+        res.status(204).send({ status: "DELETED", data: { aircraftId: aircraftId} });
     } catch (error) {
         res
             .status(error?.status || 500)

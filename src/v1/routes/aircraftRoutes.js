@@ -58,10 +58,16 @@ router.get( '/', aircraftController.getAllAircraft);
 
 /**
  * @openapi
- * /api/v1/aircraft/:aircraftId:
+ * /api/v1/aircraft/{aircraftId}:
  *   get:
  *     tags:
  *       - Aircraft
+ *     parameters:
+ *       - in: path
+ *         name: aircraftId
+ *         schema:
+ *           type: string
+ *         example: HB-ABC
  *     responses:
  *       200:
  *         description: OK
@@ -101,6 +107,13 @@ router.get('/:aircraftId', aircraftController.getAircraftById);
  *   post:
  *     tags:
  *       - Aircraft
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             $ref: '#/components/schemas/Aircraft'
  *     responses:
  *       200:
  *         description: OK
@@ -136,10 +149,43 @@ router.post('/', aircraftController.createNewAircraft);
 
 /**
  * @openapi
- * /api/v1/aircraft/:aircraftId:
+ * /api/v1/aircraft/{aircraftId}:
  *   patch:
  *     tags:
  *       - Aircraft
+ *     parameters:
+ *       - in: path
+ *         name: aircraftId
+ *         schema:
+ *           type: string
+ *         example: HB-ABC
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *              type:
+ *                type: string
+ *                example: Turbine
+ *              manufacturer:
+ *                type: string
+ *                example: Robinson
+ *              model:
+ *                type: string
+ *                example: R66
+ *              operator:
+ *                type: string
+ *                example: Foobar GmbH
+ *              passenger:
+ *                type: int
+ *                example: 5
+ *              specs:
+ *                type: array
+ *                items:
+ *                  type: string
+ *                example: ["huge performance", "affordable hour rate", "turbine"]
  *     responses:
  *       200:
  *         description: OK
@@ -175,13 +221,33 @@ router.patch('/:aircraftId', aircraftController.updateAircraftById);
 
 /**
  * @openapi
- * /api/v1/aircraft/:aircraftId:
+ * /api/v1/aircraft/{aircraftId}:
  *   delete:
  *     tags:
  *       - Aircraft
+ *     parameters:
+ *       - in: path
+ *         name: aircraftId
+ *         schema:
+ *           type: string
+ *         example: HB-ABC
  *     responses:
  *       204:
  *         description: OK
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 status:
+ *                   type: string
+ *                   example: DELETED
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     aircraftID:
+ *                       type: string
+ *                       example: "HB-ABCD"
  *       5XX:
  *         description: FAILED
  *         content:

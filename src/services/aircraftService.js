@@ -17,7 +17,7 @@ const prisma = new PrismaClient()
  *         manufacturer:
  *           type: string
  *           example: Robinson
- *         equipment:
+ *         model:
  *           type: string
  *           example: R66
  *         operator:
@@ -33,10 +33,10 @@ const prisma = new PrismaClient()
  *           example: ["huge performance", "affordable hour rate", "turbine"]
  *         createdAt:
  *           type: string
- *           example: 8.12.2023, 10:29:00
+ *           example: 2023-12-08 12:10:00
  *         updatedAt:
  *           type: string
- *           example: 27.12.2023, 12:10:20
+ *           example: 2023-12-27 12:10:00
  */
 async function getAllAircraft(filterParams) {
     try {
