@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+    database:
+        image: mariadb:10.11
+        container_name: rotor-manager-database
+        restart: unless-stopped
+        environment:
+            MARIADB_DATABASE: ${DB_DATABASE}
+            MARIADB_PASSWORD: ${DB_PASSWORD}
+            MARIADB_USER: ${DB_USERNAME}
+            MARIADB_ROOT_PASSWORD: r0t0rc0pt3r
+        ports:
+            - '${DB_PORT}:${DB_PORT}'
+        volumes:
+            - ./.docker/mysql/:/tmp/mysql
+    phpmyadmin:
+        container_name: rotor-manager-phpmyadmin
+        image: phpmyadmin
+        restart: unless-stopped
+        ports:
+            - '8080:8080'
+        environment:
+            - PMA_ARBITRARY=1
